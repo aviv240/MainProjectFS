@@ -25,41 +25,41 @@ The Project is divided to 2 main parts: Back-end and Front-end.
      # Categories - the information of all the categories available for the Coupon system.
 
 
-  2.The second layer is the Repositories -- there are 3 Repositories one for each user type: 
+  2.The second layer is the Repositories -- there are 3 Repositories, one for each user type: 
      1. Admin
      2. Company
      3. Customer
 
-     all the 3 of the classes extend the Class JPARepository
+     All the 3 of the classes extend the Class JPARepository
 
-  3.The third layer is the DBDAO -- there are 3 Dbdao one for each user type:
+  3.The third layer is the DBDAO -- there are 3 DBDAO, one for each user type:
     1. Admin
     2. Company
     3. Customer
 
-    all the classes @Autowire their user type repositories, and use the built methods in the repository to make basic actions 
+    All the classes @Autowire their user type repositories, and use the built methods in the repository to make basic actions 
     on the Database like CRUD(Create, Read, Update, Delete):
 
-    using methods like save(), findById(), findAll() and some custom query.
+    Using methods like save(), findById(), findAll() and some custom query.
 
-   4.The fourth layer is the Facade -- there are 3 Facades one for each user type:
+   4.The fourth layer is the Facade -- there are 3 Facades, one for each user type:
       1. Admin
       2. Company
       3. Customer
 
-      all the 3 Facade classes extend a main facade class that @Autowire all the 3 DBDAO.
+      All the 3 Facade classes extend a main facade class that @Autowire all the 3 DBDAO.
 
-      the Facade is the main layer of the project, it holds all the validations and all the methodology of the server side like:
+      The Facade is the main layer of the project, it holds all the validations and all the methodology of the server side like:
 
-        1. Login Method that checks the Database(admin login is hard coded) and generates a token and returns it.
+        1. Login Method that checks the Database(admin login is hard coded), generates a token and returns it.
         2. Adding new coupons, companies or customers.
-        3. updating coupons, companies or customers.
-        4. deleting coupons, companies or customers.
-        5. extracting information about coupons, companies or customers.
+        3. Updating coupons, companies or customers.
+        4. Deleting coupons, companies or customers.
+        5. Extracting information about coupons, companies or customers.
 
-   5. the fifth and last layer is the Controllers(Rest) -- there are 3 Controllers one for each user type:
+   5. The fifth and last layer is the Controllers(Rest) -- there are 3 Controllers, one for each user type:
 
-        the controllers has a method for each method that exists in the facades but it connects the server to the website 
+        The controllers has a method for each method that exists in the facades but it connects the server to the website 
         using rest.
 
    More Features:
