@@ -64,11 +64,11 @@ The Project is divided to 2 main parts: Back-end and Front-end.
 
    More Features:
 
-      **Login Manager - handles the login to the server, using the facades login Methods, based on a token that is being requested from the     
+      # Login Manager - handles the login to the server, using the facades login Methods, based on a token that is being requested from the     
       Website (client) and managed by the Server, the server generates a random token using a java.util.UUID Library and returns it to the 
-      client side.**
+      client side.
 
-      **Daily Thread - checks each day for Coupons that are expired.**
+      # Daily Thread - checks each day for Coupons that are expired.
 
 
 Front-End: (still under development, version of the website in the files is not updated)
