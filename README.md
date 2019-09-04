@@ -1,43 +1,75 @@
 Summary:
 
-The project is a Coupon system that contains coupons being uploaded by Companies,
-and can be viewed and bought by Customers using the client side, which is a website built with AngularJS, Html and CSS.
+The project is a Coupon system that contains coupons being uploaded by Companies, and can be viewed and bought by Customers using the client side.
 
-The server side is built uaing Java, Spring and JDBC.
+Client side: HTML, CSS and AngularJS(Type Script).
 
-And for the Database SQLServer is used.
+Server side: Java, Spring and JDBC.
 
-Main Features:
--- Login system based on a token that is being requested from the Website(client) and managed by the Server,the server generates a 
-random token using a java.util.UUID Library. 
+Database: SQLServer.
 
--- Coupon cleanup thread - deletes all the expired coupons from the Database(check the end date of the coupon each day)
+ **Project Structure:**
 
---three way system(Facade system):
-1.Administrator.
-2.Company.
-3.Customer.
+The Project is divided to 2 main parts: Back-end and Front-end.
 
-Project Structure:
+  **Back-End:**
 
-Back-End:
+    The back-end has 5 layers:
 
-At the base of the Project there is the Database:SQLServer
+  1.The first layer is the Database(SQLServer) -- There are 5 tables in the Database:
 
-there are 3 classes that are connected to him, Admin, Company and Customer Repositories -- they have all the commands that speak directly 
-to the Database like C.U.R.D(Create, Update, Read, Delete).
+     # Companies Table - the information of all the companies that have registered into the website.
+     # Customers Table - the information of all the customers that have registered into the website.
+     # Coupons Table - the information of all the coupons that have been created by the companies.
+     # Customers_VS_Coupons - the information of all the Purchases of coupons that have been made by customers.
+     # Categories - the information of all the categories available for the Coupon system.
 
-then there are 3 classes that are DBDAO (connection between the facades and the repositories), Admin, Company and Customer DBDAO -- 
-thay have methods that use the repository's methods to talk to the Database using Spring Framework.
 
-then there are 3 classes that are the Facades(the side that is closest to the client) -- their methods are most of the functionality and methodology all the validations the checks the flagging happends in the facades, it is the heart of the server.
+  2.The second layer is the Repositories -- there are 3 Repositories one for each user type: 
+     1. Admin
+     2. Company
+     3. Customer
 
-then there are 3 classes that are Controllers(the connector between the requests from the client-side and the responses of the server-side using REST) -- they have methods that are being used by the client-side.
+     all the 3 of the classes extend the Class JPARepository
 
-Front-End(still under development, version of the website in the files is not updated)
+  3.The third layer is the DBDAO -- there are 3 Dbdao one for each user type:
+    1. Admin
+    2. Company
+    3. Customer
 
-it is a website being built with HTML, CSS and AngularJS(Type Script).
+    all the classes @Autowire their user type repositories, and use the built methods in the repository to make basic actions 
+    on the Database like CRUD(Create, Read, Update, Delete):
 
-Main Features:
+    using methods like save(), findById(), findAll() and some custom query.
 
+   4.The fourth layer is the Facade -- there are 3 Facades one for each user type:
+      1. Admin
+      2. Company
+      3. Customer
+
+      all the 3 Facade classes extend a main facade class that @Autowire all the 3 DBDAO.
+
+      the Facade is the main layer of the project, it holds all the validations and all the methodology of the server side like:
+
+        1. Login Method that checks the Database(admin login is hard coded) and generates a token and returns it.
+        2. Adding new coupons, companies or customers.
+        3. updating coupons, companies or customers.
+        4. deleting coupons, companies or customers.
+        5. extracting information about coupons, companies or customers.
+
+   5. the fifth and last layer is the Controllers(Rest) -- there are 3 Controllers one for each user type:
+
+        the controllers has a method for each method that exists in the facades but it connects the server to the website 
+        using rest.
+
+   More Features:
+
+      **Login Manager - handles the login to the server, using the facades login Methods, based on a token that is being requested from the     
+      Website (client) and managed by the Server, the server generates a random token using a java.util.UUID Library and returns it to the 
+      client side.**
+
+      **Daily Thread - checks each day for Coupons that are expired.**
+
+
+Front-End: (still under development, version of the website in the files is not updated)
 
