@@ -99,7 +99,7 @@ public class CompanyController extends ClientController{
 
 //********************************************************************************************************************
 	//TODO still needs checking in postman
-	@PutMapping(path = "/Upd/{token}")
+	@PutMapping(path = "/{token}")
 	public ResponseEntity<?> updateCoupon(@RequestBody Coupon coupon, @PathVariable String token) {
 			
 		Session s = isActive(token);

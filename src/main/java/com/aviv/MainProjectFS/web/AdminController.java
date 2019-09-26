@@ -47,29 +47,6 @@ public class AdminController extends ClientController {
 
 //**************************************************** Methods *******************************************************
 	
-//TODO - create a page to do a global login like on facebook.
-	
-//	@Override
-//	@PostMapping(path = "/{email}/{password}/{token}")
-//	public ResponseEntity<?> login(@PathVariable String email, @PathVariable String password) {
-//		
-//		try {
-//			if(adminF.login(email, password)) {
-//			
-//				return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-//			
-//			}
-//			
-//			return new ResponseEntity<Boolean>(false, HttpStatus.OK);
-//			
-//		} catch (LoginFailedException e) {
-//			
-//			return new ResponseEntity<String>("{\"error\":\""+e.getMessage()+"\"}" , HttpStatus.INTERNAL_SERVER_ERROR);
-//			
-//		}
-//	}
-	
-//********************************************************************************************************************
 	
 	@PostMapping(path = "/compAdd/{token}")
 	public ResponseEntity<?> addCompany(@RequestBody Company company, @PathVariable String token) {

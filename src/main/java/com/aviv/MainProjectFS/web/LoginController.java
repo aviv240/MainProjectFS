@@ -6,8 +6,10 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aviv.MainProjectFS.facades.ClientFacade;
@@ -17,7 +19,8 @@ import com.aviv.MainProjectFS.loginManager.ClientType;
 import com.aviv.MainProjectFS.loginManager.LoginManager;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
+@RequestMapping(path = "login")
 public class LoginController {
 
 	@Autowired
@@ -27,7 +30,7 @@ public class LoginController {
 	@Autowired
 	private LoginManager loginM;
 	
-	@PostMapping()
+	@PostMapping(path = "/{email}/{password}/{type}")
 	public ResponseEntity<String> login(@PathVariable("email") String email, @PathVariable("password") String password, @PathVariable("type") String type){
 		
 		Session s = new Session();
@@ -44,7 +47,7 @@ public class LoginController {
 			
 			tokensMap.put(token, s);
 			
-			return new ResponseEntity<String>("{\"token\":\"" + token + "\'", HttpStatus.OK);
+			return new ResponseEntity<String>("{\"token\":\"" + token + "\"}", HttpStatus.OK);
 		
 		}catch(LoginFailedException | DoNotExistsException e) {
 			

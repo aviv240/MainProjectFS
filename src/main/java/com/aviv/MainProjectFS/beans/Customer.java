@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Entity
 @Table(name = "Customers")
@@ -88,12 +90,14 @@ public class Customer {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
-	public String getLast_name() {
+	
+	@JsonProperty("lastName")
+	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLast_name(String lastName) {
+	@JsonProperty("lastName")
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
@@ -130,7 +134,7 @@ public class Customer {
 	
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
+		return "Customer [id=" + id + ", firstName=" + firstName + ", last_Name=" + lastName + ", password="
 				+ password + ", email=" + email + ", coupons=" + coupons + "]";
 	}
 	

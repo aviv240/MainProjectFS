@@ -189,5 +189,12 @@ public class CustomerFacade extends ClientFacade{
 		
 	}
 	
+//*****************************************************************************************************************
+
+	public List<Coupon> getAllCoupons(){
+		
+		return coupDBDAO.getAllCoupons();
+		
+	}
 	
 }

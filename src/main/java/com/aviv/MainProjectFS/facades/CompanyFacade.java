@@ -78,10 +78,8 @@ public class CompanyFacade extends ClientFacade{
 		
 		if(coupDBDAO.isCouponExists(coupon)) {
 			
-			throw new DoNotExistsException("Coupon");
-		}
-		else {
-				
+			coupon.setCompany(companyDetails());
+			
 			for (Coupon coupon2 : coupons) {
 				
 				if(coupon.getCompany().getId() == coupon2.getCompany().getId() && coupon.getId() == coupon2.getId()) {
@@ -98,6 +96,11 @@ public class CompanyFacade extends ClientFacade{
 				}
 				
 			}
+			
+		}
+		else {
+				
+			throw new DoNotExistsException("Coupon");
 		
 		}
 		

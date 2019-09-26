@@ -23,9 +23,10 @@ import com.aviv.MainProjectFS.facades.CustomerFacade;
 import com.aviv.MainProjectFS.facades.Exceptions.CanNotPurchaseException;
 import com.aviv.MainProjectFS.facades.Exceptions.DoNotExistsException;
 import com.aviv.MainProjectFS.facades.Exceptions.LoginFailedException;
+import com.google.common.net.MediaType;
 
 @RestController
-@RequestMapping("customer")
+@RequestMapping(path="customer")
 public class CustomerController extends ClientController {
 	
 	@Autowired
@@ -187,6 +188,50 @@ public class CustomerController extends ClientController {
 				return new ResponseEntity<String>("{\"error\":\""+e.getMessage()+"\"}", HttpStatus.INTERNAL_SERVER_ERROR);
 						
 			}
+	
+		}
+	
+		return new ResponseEntity<String>("{\"error\":\"You are not autorized to do this action!\"}", HttpStatus.UNAUTHORIZED);
+	
+	}
+	
+//********************************************************************************************************************	
+	
+	@GetMapping(path = "/getOneCoup/{couponID}/{token}")
+	public ResponseEntity<?> getOneCoupon(@PathVariable("couponID") int id, @PathVariable String token){
+		
+		Session s = isActive(token);
+		
+		if(s != null) {
+		
+			try {
+
+				s.setLastAccess(System.currentTimeMillis());
+				
+				return new ResponseEntity<Coupon>(custF.getOneCoupon(id), HttpStatus.OK);
+					
+			} catch (Exception e) {
+					
+				return new ResponseEntity<String>("{\"error\":\""+e.getMessage()+"\"}", HttpStatus.INTERNAL_SERVER_ERROR);
+					
+			}
+			
+		}
+		
+		return new ResponseEntity<String>("{\"error\":\"You are not autorized to do this action!\"}", HttpStatus.UNAUTHORIZED);
+
+			
+	}
+//********************************************************************************************************************
+
+	@GetMapping("/getAll/{token}")
+	public ResponseEntity<?> getAllCoupons(@PathVariable String token){
+		
+		Session s = isActive(token);
+		
+		if(s != null) {
+					
+			return new ResponseEntity<List<Coupon>>(custF.getAllCoupons(), HttpStatus.OK);
 	
 		}
 	

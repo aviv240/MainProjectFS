@@ -38,8 +38,6 @@ public class Coupon {
 
 	@Column(length = 500, name = "Image")
 	private String image;
-	@Column(length = 800, name = "Message")
-	private String message;
 	@Column(length = 200, unique = true, name = "Title")
 	private String title;
 	@Column(length = 500, name = "Description")
@@ -73,14 +71,13 @@ public class Coupon {
 	 * @param image      - the link of the image of the coupon
 	 */
 
-	public Coupon(int amount, Company company, double price, String image, String message, String title,
+	public Coupon(int amount, Company company, double price, String image, String title,
 			String description, Category category, Date startDate, Date endDate) {
 
 		this.amount = amount;
 		this.company = company;
 		this.price = price;
 		this.image = image;
-		this.message = message;
 		this.title = title;
 		this.description = description;
 		this.category = category;
@@ -103,7 +100,7 @@ public class Coupon {
 	 * @param image      - the link of the image of the coupon
 	 */
 
-	public Coupon(int id, int amount, Company company, double price, String image, String message, String title,
+	public Coupon(int id, int amount, Company company, double price, String image, String title,
 			String description, Category category, Date startDate, Date endDate) {
 
 		this.id = id;
@@ -111,7 +108,6 @@ public class Coupon {
 		this.company = company;
 		this.price = price;
 		this.image = image;
-		this.message = message;
 		this.title = title;
 		this.description = description;
 		this.category = category;
@@ -152,14 +148,6 @@ public class Coupon {
 
 	public void setImage(String image) {
 		this.image = image;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	public String getTitle() {
@@ -211,7 +199,7 @@ public class Coupon {
 	@Override
 	public String toString() {
 		return "Coupon [id=" + id + ", amount=" + amount + ", price=" + price + ", image="
-				+ image + ", message=" + message + ", title=" + title + ", description=" + description + ", category="
+				+ image + ", title=" + title + ", description=" + description + ", category="
 				+ category + ", startDate=" + startDate + ", endDate=" + endDate + "]";
 	}
 
